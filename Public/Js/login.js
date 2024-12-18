@@ -6,7 +6,7 @@ export function validateLogin(username, password) {
         (username === "teste@teste" && password === "teste")
     ) {
         alert("Login bem-sucedido!");
-        window.location.href = "../home";
+        window.location.href = "../";
     } else {
         alert("Nome de usuário ou senha incorretos.");
     }
