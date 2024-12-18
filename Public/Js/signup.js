@@ -1,19 +1,3 @@
-export function createUser(username, email, cpf, password) {
-    const newUser = { username, email, cpf, password };
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some(user => user.username === username || user.cpf === cpf);
-    if (userExists) {
-        alert("Username or CPF already exists. Please choose a different one.");
-        return;
-    }
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert("Account created successfully!");
-
-    window.location.href = "../login";
-}
 
 export function TestaCPF(cpf) {
     cpf = cpf.replace(/\D/g, ""); 

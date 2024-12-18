@@ -1,15 +1,13 @@
-const { Sequelize } = require('sequelize');
+// Requerimentos
+const { Sequelize } = require("sequelize");
 
-// Configuração do Sequelize
-const sequelize = new Sequelize('banco_f1', 'root', 'senha', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    logging: false
+// Cria uma instância do Sequelize para conexão com o banco de dados SQLite
+const sequelize = new Sequelize('userTable', 'user', 'user', {
+  // Especifica o dialeto do banco de dados como 'sqlite'
+  dialect: 'sqlite',
+  // Define o arquivo SQLite onde os dados serão armazenados
+  host: 'boraf1DB.sqlite'
 });
 
-// Testar conexão
-sequelize.authenticate()
-    .then(() => console.log('Conexão com o banco de dados estabelecida!'))
-    .catch(err => console.error('Erro ao conectar no banco:', err));
-
+// Exporta a instância `sequelize` para ser utilizada em outras partes da aplicação
 module.exports = sequelize;

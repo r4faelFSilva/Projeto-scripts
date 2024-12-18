@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h2>Signup Form</h2>
-        <form id="signupForm">
+        <form id="signupForm" method="post" action="/signup">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -44,34 +44,6 @@
         </form>
         <p id="message"></p>
     </div>
-
-    <script type="module">
-        import { createUser, TestaCPF } from '../Js/signup.js';
-
-        document.getElementById('signupForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const cpf = document.getElementById('cpf').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (!TestaCPF(cpf)) {
-                document.getElementById('cpfError').textContent = "Invalid CPF!";
-                return;
-            } else {
-                document.getElementById('cpfError').textContent = "";
-            }
-
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            createUser(username, email, cpf, password);
-        });
-    </script>
 </body>
 
 </html>

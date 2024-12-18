@@ -1,12 +1,13 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../Config/database');
+//Requerimentos
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/database.js");
+const { userInfo } = require("os");
 
-const User = sequelize.define('User', {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
+// Define a classe User, que estende a classe Model do Sequelize
+class User extends Model {}
+
+// Inicializa o modelo User com os campos e configurações para a tabela
+User.init({
     username: {
         type: DataTypes.STRING,
         allowNull: false
@@ -27,10 +28,18 @@ const User = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    } 
+  
 }, {
-    tableName: 'users',
-    timestamps: false
+  // Configurações adicionais para o modelo
+  sequelize,                
+  modelName: 'usuarios',    
+  timestamps: false          
 });
 
+// Exporta o modelo User para ser utilizado em outras partes do aplicativo
 module.exports = User;
+
+
+
+ 
