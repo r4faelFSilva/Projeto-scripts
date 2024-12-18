@@ -1,0 +1,68 @@
+<%- include('partials/header') %> <!-- Inclui o Header -->
+
+<!-- Banner -->
+<section class="banners banner-1 d-flex flex-column justify-content-center text-center">
+    <div class="parallax-banner">
+        <div class="banner-overlay">
+            <div class="banner-text">
+                <h1>Bem-vindo ao Nosso Site</h1>
+                <p>Explore nosso conteúdo incrível sobre automobilismo!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Últimas Notícias -->
+<section id="noticias" class="mb-5">
+    <h2 class="section-title">Últimas Notícias</h2>
+    <div class="row">
+        <article class="col-md-7">
+            <div class="cardNoticia">
+                <img src="/img/imgNoticia1.jpg" class="card-img-top" alt="Grande Prêmio do Brasil 2024">
+                <div class="card-body">
+                    <h3 class="card-title">Grande Prêmio do Brasil 2024</h3>
+                    <p class="card-text">Confira as atualizações e expectativas para o GP de Interlagos!</p>
+                    <a href="https://www.formula1.com/en/racing/2024/brazil" class="btn btn-primary" target="_blank">Leia mais</a>
+                </div>
+            </div>
+        </article>
+        <article class="col-md-5">
+            <div class="cardNoticia">
+                <img src="/img/imgNoticia2.jpg" class="card-img-top" alt="vista superior da largada">
+                <div class="card-body">
+                    <h3 class="card-title">Novas Atualizações para 2025</h3>
+                    <p class="card-text">Veja as mudanças que estão por vir para a próxima temporada.</p>
+                    <a href="https://ge.globo.com" class="btn btn-primary" target="_blank">Leia mais</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- Calendário -->
+<section id="calendario" class="mb-5">
+    <h2 class="section-title">Calendário da Temporada</h2>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Corrida</th>
+                <th>Local</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>27 de Outubro</td>
+                <td>Grande Prêmio do México</td>
+                <td>Cidade do México</td>
+            </tr>
+            <tr>
+                <td>03 de Novembro</td>
+                <td>Grande Prêmio do Brasil</td>
+                <td>São Paulo</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<%- include('partials/footer') %> <!-- Inclui o Footer -->
