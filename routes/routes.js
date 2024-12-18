@@ -17,5 +17,24 @@ router.get('/signup', AuthController.renderSignup);
 // Rota POST para processar o signup
 router.post('/signup', AuthController.handleSignup);
 
+const express = require('express');
+const router = express.Router();
+const AuthController = require('../Controller/AuthController');
+
+// Rotas de signup
+router.get('/signup', AuthController.renderSignup);
+router.post('/signup', AuthController.handleSignup);
+
+const express = require('express');
+const router = express.Router();
+const AuthController = require('../Controller/AuthController');
+
+// Rotas de login
+router.get('/login', AuthController.renderLogin);
+router.post('/login', AuthController.handleLogin);
+
+// Rotas de signup
+router.get('/signup', AuthController.renderSignup);
+router.post('/signup', AuthController.handleSignup);
 
 module.exports = router;

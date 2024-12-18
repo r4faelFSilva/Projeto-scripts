@@ -52,3 +52,28 @@ exports.handleSignup = async (req, res) => {
         res.status(500).send('Erro ao cadastrar usuário.');
     }
 };
+
+const User = require('../models/User');
+
+exports.renderLogin = (req, res) => {
+    res.render('login', { title: 'Login - Bora F1' });
+};
+
+exports.handleLogin = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Buscar usuário pelo email
+        const user = await User.findOne({ where: { email } });
+
+        // Verificar se o usuário existe e a senha está correta
+        if (!user || user.password !== password) {
+            return res.status(401).send('Credenciais inválidas! Verifique seu email e senha.');
+        }
+
+        res.send(`Login bem-sucedido! Bem-vindo, ${user.username}`);
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        res.status(500).send('Erro interno no servidor.');
+    }
+};
