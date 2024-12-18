@@ -17,4 +17,5 @@ router.get('/signup', AuthController.renderSignup);
 // Rota POST para processar o signup
 router.post('/signup', AuthController.handleSignup);
 
+
 module.exports = router;

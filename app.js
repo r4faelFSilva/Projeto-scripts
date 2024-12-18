@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'Views'));
 
 // Middleware para servir arquivos estáticos e parsear formulários
-app.use(express.static(path.join(__dirname, 'Public')));
+app.use(express.static(path.join(__dirname, 'Public'))); // Aqui serve os arquivos da pasta Public
 app.use(bodyParser({ extended: true }));
 
 // Importar as rotas
