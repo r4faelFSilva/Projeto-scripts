@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('express').urlencoded;
+const routes = require('./routes/routes'); // Caminho correto para o arquivo routes.js
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,15 +10,14 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'Views'));
 
-// Middleware para servir arquivos estáticos e parsear formulários
-app.use(express.static(path.join(__dirname, 'Public'))); // Aqui serve os arquivos da pasta Public
+// Middleware
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use(bodyParser({ extended: true }));
 
-// Importar as rotas
-const routes = require('./routes/routes');
+// Usa as rotas
 app.use('/', routes);
 
 // Inicia o servidor
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

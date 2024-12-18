@@ -5,30 +5,6 @@ const AuthController = require('../Controller/AuthController'); // Importa o con
 // Rota GET para a Home
 router.get('/', AuthController.renderHome);
 
-// Rota GET para a página de login
-router.get('/login', AuthController.renderLogin);
-
-// Rota POST para processar o login
-router.post('/login', AuthController.handleLogin);
-
-// Rota GET para a página de signup
-router.get('/signup', AuthController.renderSignup);
-
-// Rota POST para processar o signup
-router.post('/signup', AuthController.handleSignup);
-
-const express = require('express');
-const router = express.Router();
-const AuthController = require('../Controller/AuthController');
-
-// Rotas de signup
-router.get('/signup', AuthController.renderSignup);
-router.post('/signup', AuthController.handleSignup);
-
-const express = require('express');
-const router = express.Router();
-const AuthController = require('../Controller/AuthController');
-
 // Rotas de login
 router.get('/login', AuthController.renderLogin);
 router.post('/login', AuthController.handleLogin);
@@ -37,4 +13,5 @@ router.post('/login', AuthController.handleLogin);
 router.get('/signup', AuthController.renderSignup);
 router.post('/signup', AuthController.handleSignup);
 
+// Exporta o roteador
 module.exports = router;
