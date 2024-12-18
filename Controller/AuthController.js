@@ -28,3 +28,27 @@ exports.handleSignup = (req, res) => {
   console.log(`Usuário criado: ${username}, Email: ${email}, CPF: ${cpf}`);
   res.send('Cadastro realizado com sucesso!');
 };
+
+const User = require('../models/User');
+
+exports.renderSignup = (req, res) => {
+    res.render('signup', { title: 'Cadastro - Bora F1' });
+};
+
+exports.handleSignup = async (req, res) => {
+    const { username, email, cpf, password } = req.body;
+
+    try {
+        await User.create({
+            username,
+            email,
+            cpf,
+            password
+        });
+
+        res.send('Usuário cadastrado com sucesso!');
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+        res.status(500).send('Erro ao cadastrar usuário.');
+    }
+};
