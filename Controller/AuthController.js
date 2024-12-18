@@ -24,7 +24,7 @@ exports.handleSignup = async (req, res) => {
 
   try {
     // Criar usuário no banco de dados
-    await User.create({
+    await usuario.create({
       username,
       email,
       cpf,
