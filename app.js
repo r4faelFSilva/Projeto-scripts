@@ -1,25 +1,31 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('express').urlencoded;
-const routes = require('./routes/routes'); // Caminho correto para o arquivo routes.js
-const sequelize = require("./config/database.js");
+import express from 'express';
+import path from 'path';
+import routes from './routes/routes.js';
+import sequelize from './config/database.js';
+
 const app = express();
 const PORT = process.env.PORT || 3040;
 
-sequelize.sync().then(() => console.log('------------------------------Banco Rodando!------------------------------'));
+// Sync database
+sequelize.sync().then(() => {
+  console.log('Database connected successfully.');
+});
 
-// Configuração do EJS
+// Set view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'Views'));
+app.set('views', path.join(path.resolve(), 'views'));
 
-// Middleware
-app.use(express.static(path.join(__dirname, 'Public')));
-app.use(bodyParser({ extended: true }));
+// Serve static files
+app.use(express.static(path.join(path.resolve(), 'public')));
 
-// Usa as rotas
+// Middleware for parsing form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Use routes
 app.use('/', routes);
 
-// Inicia o servidor
+// Start server
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

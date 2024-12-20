@@ -1,13 +1,9 @@
-// Requerimentos
-const { Sequelize } = require("sequelize");
+import { Sequelize } from 'sequelize';
 
-// Cria uma instância do Sequelize para conexão com o banco de dados SQLite
 const sequelize = new Sequelize('userTable', 'user', 'user', {
-  // Especifica o dialeto do banco de dados como 'sqlite'
   dialect: 'sqlite',
-  // Define o arquivo SQLite onde os dados serão armazenados
-  host: 'boraf1DB.sqlite'
+  storage: './boraf1DB.sqlite', // Use 'storage' instead of 'host'
 });
 
-// Exporta a instância `sequelize` para ser utilizada em outras partes da aplicação
-module.exports = sequelize;
+// Export the sequelize instance to be used in other parts of the application
+export default sequelize;

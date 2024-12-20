@@ -1,5 +1,4 @@
-
-export function TestaCPF(cpf) {
+export function testaCPF(cpf) {
     cpf = cpf.replace(/\D/g, ""); 
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false; 
     let soma = 0, resto;

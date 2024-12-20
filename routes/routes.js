@@ -1,16 +1,17 @@
-const express = require('express');
+import express from 'express';
+import AuthController from '../Controller/AuthController.js'
+
 const router = express.Router();
-const AuthController = require('../Controller/AuthController'); // Importa o controller
 
-// Rota GET para a Home
-router.get('/', AuthController.renderHome);
-router.get('/home', AuthController.renderHome);
-// Rotas de login
-router.get('/login', AuthController.renderLogin);
-router.post('/login', AuthController.handleLogin);
+// Authentication Routes
+router.get('/login', (req, res) => res.render('login'));
+router.post('/login', AuthController.userLogin);
 
-// Rotas de signup
-router.get('/signup', AuthController.renderSignup);
-router.post('/signup', AuthController.handleSignup);
-// Exporta o roteador
-module.exports = router;
+// Signup Routes
+router.get('/signup', (req, res) => res.render('signup'));
+router.post('/signup', AuthController.cadastrarUser);
+// Home Route
+router.get('/home', (req, res) => res.render('home'));
+router.get('/', (req, res) => res.render('home'));
+
+export default router;

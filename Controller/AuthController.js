@@ -1,60 +1,57 @@
-const usuario = require("../Models/User");
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import { testaCPF } from '../Public/Js/signup.js'; // Import the CPF validation function
 
-// Rendezirar página Home
-exports.renderHome = (req, res) => {
-  res.render("home", { title: "Home - Bora F1" });
-};
+class AuthController {
+  static async userLogin(req, res) {
+    const { username, password } = req.body;
 
-// Renderizar página de Login
-exports.renderLogin = (req, res) => {
-  res.render("login", { title: "Login - Bora F1" });
-};
+    try {
+      const user = await User.findOne({ where: { username } });
 
-// Processar Login
+      if (!user || !bcrypt.compareSync(password, user.password)) {
+        return res.render('login', { error: 'Invalid username or password.' });
+      }
 
-
-// Renderizar página de Signup
-exports.renderSignup = (req, res) => {
-  res.render("signup", { title: "Signup - Bora F1" });
-};
-
-// Processar Signup
-exports.handleSignup = async (req, res) => {
-  const { username, email, cpf, password } = req.body;
-
-  try {
-    // Criar usuário no banco de dados
-    await usuario.create({
-      username,
-      email,
-      cpf,
-      password,
-    });
-
-    res.send("Usuário cadastrado com sucesso!");
-  } catch (error) {
-    console.error("Erro ao cadastrar usuário:", error);
-    res.status(500).send("Erro ao cadastrar usuário.");
+      res.redirect('/home');
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).render('login', { error: 'Internal server error.' });
+    }
   }
-};
 
+  static async cadastrarUser(req, res) {
+    const { username, email, cpf, password, confirmPassword } = req.body;
 
-
-exports.handleLogin = async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Buscar usuário pelo email no banco
-    const User = await usuario.findOne({ where: { username } });
-
-    // Verificar credenciais
-    if (!User || User.password !== password) {
-      return res.status(401).send("Credenciais inválidas! Verifique seu email e senha.");
+    // Validate CPF
+    if (!testaCPF(cpf)) {
+      return res.render('signup', { error: 'Invalid CPF.' });
     }
 
-    res.redirect('/home');
-  } catch (error) {
-    console.error("Erro ao fazer login:", error );
-    res.status(500).send("Erro interno no servidor.", );
+    // Validate password
+    if (password !== confirmPassword) {
+      return res.render('signup', { error: 'Passwords do not match.' });
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    try {
+      await User.create({
+        username,
+        email,
+        cpf,
+        password: hashedPassword,
+      });
+
+      res.redirect('/login');
+    } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        return res.render('signup', { error: `The ${error.fields} is already in use.` });
+      }
+      console.error('Error during user registration:', error);
+      res.status(500).render('signup', { error: 'Error during user registration.' });
+    }
   }
-};
+}
+
+export default AuthController;
